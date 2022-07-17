@@ -1,16 +1,27 @@
-from flask import Blueprint, send_from_directory
+from cmath import e
+from flask import Blueprint, render_template, jsonify, request, send_file
 
 from os import getcwd
 
 def chatbot():
-  
+
   chatbot = Blueprint(name='chatbot',import_name=__name__, static_folder='templates')
-  
-  path_to_home_page = 'templates/home.html'
-  
+    
   @chatbot.route('/home',methods=['GET'])
   def home():
-    print(getcwd())
-    return send_from_directory(chatbot.static_folder, 'home.html')
+    return "Hello"
+
+
+  @chatbot.route('/message',methods=['POST'])
+  def message():
+    try:
+      message = request.form['message']
+    except Exception as e:
+      print(e)
+
+    return jsonify({
+      "message": message,
+      "video_path": "/videos/input_videoKennedy.mp4"
+    }), 200
 
   return chatbot
