@@ -1,12 +1,12 @@
 from google.cloud import texttospeech
 
 
-def generate_audio(text, lang_code = "en-US", voice_name = 'en-US-Wavenet-D'):
+def generate_audio(speech_text, lang_code = "en-US", voice_name = 'en-US-Wavenet-D'):
     # Instantiates a client
     client = texttospeech.TextToSpeechClient()
 
     # Set the text input to be synthesized
-    synthesis_input = texttospeech.SynthesisInput(text)
+    synthesis_input = texttospeech.SynthesisInput(text = speech_text)
 
     # Build the voice request, select the language code ("en-US") and the ssml
     # voice gender ("neutral")
