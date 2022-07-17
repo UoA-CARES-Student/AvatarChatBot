@@ -6,3 +6,9 @@ Jinja2==3.1.2
 MarkupSafe==2.1.1
 Werkzeug==2.1.2
 zipp==3.8.1
+numpy==1.17.1
+opencv-contrib-python>=4.2.0.34
+opencv-python
+torch
+torchvision
+tqdm==4.45.0
