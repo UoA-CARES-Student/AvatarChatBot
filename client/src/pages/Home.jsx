@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 
 import { postMessage } from '../api/Api'
 
+
 const Home = ( ) => {
     
     const [videoPath, setVideoPath] = useState("")
@@ -30,8 +31,7 @@ const Home = ( ) => {
         </h2>
 
         <div className='video-player'>
-            <video width="600" height="400" autoplay controls preload>
-                <source src="/Users/takahiroi/Desktop/AvatarChatBot/ChatBotApp/media/input_videoKennedy.mp4" type="video/mp4"/>
+            <video width="600" height="400" autoPlay controls preload src={videoPath} type="video/mp4">
                 Your browser does not support the video tag.
             </video> 
         </div>

@@ -1,5 +1,5 @@
 from cmath import e
-from flask import Blueprint, send_from_directory, render_template, jsonify, request
+from flask import Blueprint, render_template, jsonify, request, send_file
 
 from os import getcwd
 
@@ -20,9 +20,8 @@ def chatbot():
       print(e)
 
     return jsonify({
-      'video_path' : "/Users/takahiroi/Desktop/AvatarChatBot/ChatBotApp/media/input_videoKennedy.mp4",
-      'message' : message,
+      "message": message,
+      "video_path": "/videos/input_videoKennedy.mp4"
     }), 200
-
 
   return chatbot

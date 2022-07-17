@@ -2,6 +2,7 @@ import axios from 'axios'
 
 
 export const postMessage = async ( data ) => {
+    console.log("Post message called")
     const videoPath = axios({
         method: "post",
         url: "/v1/chatbot/message",
