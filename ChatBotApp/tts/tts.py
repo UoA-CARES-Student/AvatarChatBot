@@ -30,7 +30,7 @@ def generate_audio(speech_text, lang_code = "en-US", voice_name = 'en-US-Wavenet
     )
 
     # The response's audio_content is binary.
-    with open("input_audio.wav", "wb") as out:
+    with open("./audio/input_audio.wav", "wb") as out:
         # Write the response to the output file.
         out.write(response.audio_content)
         print(f'Audio content written to file "input_audio.wav"')
