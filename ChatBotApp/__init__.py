@@ -1,7 +1,7 @@
 import os
 
 from flask import Flask
-
+from ChatBotApp.chatbot import chatbot
 
 def create_app(test_config=None):
     # create and configure the app
@@ -14,5 +14,7 @@ def create_app(test_config=None):
     @app.route('/hello')
     def hello():
         return 'Hello, World!'
-
+    
+    app.register_blueprint(chatbot(), url_prefix='/v1/chatbot')
+    
     return app
