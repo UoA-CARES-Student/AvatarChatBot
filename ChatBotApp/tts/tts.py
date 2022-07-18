@@ -21,6 +21,7 @@ def generate_audio(speech_text, lang_code = "en-US", voice_name = 'en-US-Wavenet
     # Select the type of audio file you want returned
     audio_config = texttospeech.AudioConfig(
         audio_encoding=texttospeech.AudioEncoding.MP3
+        #Add code to change speaking rate here https://cloud.google.com/text-to-speech/docs/reference/rest/v1/text/synthesize
     )
 
     # Perform the text-to-speech request on the text input with the selected
