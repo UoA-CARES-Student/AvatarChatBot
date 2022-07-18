@@ -133,7 +133,7 @@ def load_model(path):
 	return model.eval()
 
 
-def generate(face_path, input_audio, weights, rotate = False, outfile='results/result_voice.mp4'):
+def generate(face_path, input_audio, weights, rotate = False):
 	static = False
 	if not path.isfile(face_path):
 		raise ValueError('--face argument must be a valid path to video/image file')
