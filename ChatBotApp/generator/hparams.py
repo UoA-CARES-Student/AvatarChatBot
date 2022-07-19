@@ -74,7 +74,14 @@ hparams = HParams(
 
 	###################### Our training parameters #################################
 	img_size=96,
-	fps=25
+	fps=25,
+	face_det_batch_size = 16,
+	wav2lip_batch_size = 128,
+	resize_factor = 1,
+	nosmooth = False,
+	pads = [0, 10, 0, 0],
+	crop = [0, -1, 0, -1],
+	box = [-1, -1, -1, -1]
 	
 )
 
