@@ -13,6 +13,7 @@ const Home = ( ) => {
 
 
     const submitMessage = (e) =>{
+
         const data = new FormData()
         data.append('message', message)
         const fetchData = async () => {
@@ -20,21 +21,22 @@ const Home = ( ) => {
             // console.log(path)
             console.log(`Received data  => ${receivedData}`)
 
-            // setVideoPath(receivedData.video_path)
+            setVideoPath(`http://10.104.144.222:5000/v1/chatbot/video/${receivedData.video_path}`)
             setResponse(receivedData.message)
         }          
         fetchData()
     }
 
-
     return (
+    
     <div className='centered-div'>
         <div>
             <div>
-                <h1>Chat Bot</h1></div>
+                <h1>Chat Bot</h1> 
+            </div>
 
             <div className='player-wrapper'>
-                <video className = 'vid-player' width="600" height="400" autoPlay controls preload src="file:///home/tish386/AvatarChatBot/ChatBotApp/results/result_voice.mp4" type="video/mp4">
+                <video className = 'vid-player' width="600" height="400" autoPlay controls preload src={videoPath} type="video/mp4">
                     Your browser does not support the video tag.
                 </video> 
             </div>

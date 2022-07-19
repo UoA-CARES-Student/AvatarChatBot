@@ -5,10 +5,13 @@ import subprocess
 from tqdm import tqdm
 import torch, ChatBotApp.generator.face_detection as face_detection
 from ChatBotApp.generator.models import Wav2Lip
-import platform
+import platform, random, string
 from ChatBotApp.generator.hparams import hparams as hp
 
-# static = False
+
+def genRandString():
+	letters = string.ascii_lowercase
+	return ''.join(random.choice(letters) for i in range (10)) + '.mp4'
 
 def get_smoothened_boxes(boxes, T):
 	for i in range(len(boxes)):
@@ -233,8 +236,8 @@ def generate(face_path, input_audio, weights, rotate = False):
 
 	out.release()
 
-	command = 'ffmpeg -y -i {} -i {} -strict -2 -q:v 1 {}'.format(input_audio, 'ChatBotApp/generator/temp/result.avi', hp.outfile)
+	vidName = genRandString()
+	command = 'ffmpeg -y -i {} -i {} -strict -2 -q:v 1 {}'.format(input_audio, 'ChatBotApp/generator/temp/result.avi', hp.outfile + vidName)
 	subprocess.call(command, shell=platform.system() != 'Windows')
 
-if __name__ == '__main__':
-	main()
+	return vidName

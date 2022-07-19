@@ -11,12 +11,12 @@ def generate_video(message, face_path, input_audio, weights):
 
     response = convo.chat(message)
 
-    # tts.generate_audio(response)
+    tts.generate_audio(response)
 
-    # generator.generate(face_path, input_audio, weights)
+    vid_name = generator.generate(face_path, input_audio, weights)
 
 
-    return response
+    return response, vid_name
 
 
     

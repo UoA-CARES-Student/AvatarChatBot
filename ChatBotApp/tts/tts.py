@@ -1,8 +1,8 @@
 from google.cloud import texttospeech
 
 
-def generate_audio(speech_text, lang_code = "en-US", voice_name = 'en-US-Wavenet-D', filepath = 'ChatBotApp\resources\audio'):
-    # Instantiates a client
+def generate_audio(speech_text, lang_code = "en-US", voice_name = 'en-US-Wavenet-D', filepath = 'ChatBotApp/resources/audio/input_audio.wav'):
+    # Instantiates a clien/
     client = texttospeech.TextToSpeechClient()
 
     # Set the text input to be synthesized
@@ -30,6 +30,7 @@ def generate_audio(speech_text, lang_code = "en-US", voice_name = 'en-US-Wavenet
         input=synthesis_input, voice=voice, audio_config=audio_config
     )
 
+    print(f"filepath is {filepath}")
     # The response's audio_content is binary.
     with open(filepath, "wb") as out:
         # Write the response to the output file.
