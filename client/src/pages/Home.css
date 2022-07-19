@@ -8,12 +8,12 @@
     display : flex;
     align-items : center;
     justify-content : center;
-    height : 60vh;
+    height : 90vh;
     /* width : 50%; */
 }
 
 .chat-border{
-    background-color: brown;
+    background-color: #006AFF;
     /* padding : 1px 1px 1px 10px; */
     border-radius: 15px;
 }

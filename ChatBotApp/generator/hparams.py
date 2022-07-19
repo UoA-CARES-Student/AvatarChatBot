@@ -46,6 +46,7 @@ hparams = HParams(
 	sample_rate=16000,  # 16000Hz (corresponding to librispeech) (sox --i <filename>)
 	
 	frame_shift_ms=None,  # Can replace hop_size parameter. (Recommended: 12.5)
+
 	
 	# Mel and Linear spectrograms normalization/scaling and clipping
 	signal_normalization=True,
@@ -77,13 +78,13 @@ hparams = HParams(
 	fps=25,
 	face_det_batch_size = 16,
 	wav2lip_batch_size = 128,
-	resize_factor = 1,
+	resize_factor = 2,
 	nosmooth = False,
 	pads = [0, 10, 0, 0],
 	crop = [0, -1, 0, -1],
 	box = [-1, -1, -1, -1],
-	outfile ="ChatBotApp/resources/videos/generated_response_video.mp4"
-	
+	outfile ="ChatBotApp/results/"
+
 )
 
 

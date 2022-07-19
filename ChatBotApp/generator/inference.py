@@ -1,14 +1,17 @@
 from os import path
 import numpy as np
-import cv2,  generator.audio as audio
+import cv2,  ChatBotApp.generator.audio as audio
 import subprocess
 from tqdm import tqdm
-import torch, generator.face_detection as face_detection
-from generator.models import Wav2Lip
-import platform
-import hparams as hp
+import torch, ChatBotApp.generator.face_detection as face_detection
+from ChatBotApp.generator.models import Wav2Lip
+import platform, random, string
+from ChatBotApp.generator.hparams import hparams as hp
 
-# static = False
+
+def genRandString():
+	letters = string.ascii_lowercase
+	return ''.join(random.choice(letters) for i in range (10)) + '.mp4'
 
 def get_smoothened_boxes(boxes, T):
 	for i in range(len(boxes)):
@@ -108,7 +111,8 @@ def datagen(frames, mels, static):
 		yield img_batch, mel_batch, frame_batch, coords_batch
 
 mel_step_size = 16
-device = 'cuda' if torch.cuda.is_available() else 'cpu'
+# device = 'cuda' if torch.cuda.is_available() else 'cpu'
+device = 'cpu'
 print('Using {} for inference.'.format(device))
 
 def _load(checkpoint_path):
@@ -135,12 +139,14 @@ def load_model(path):
 
 def generate(face_path, input_audio, weights, rotate = False):
 	static = False
+	
 	if not path.isfile(face_path):
 		raise ValueError('--face argument must be a valid path to video/image file')
 
 	elif face_path.split('.')[1] in ['jpg', 'png', 'jpeg']:
 		static = True
 		full_frames = [cv2.imread(face_path)]
+
 		fps = hp.fps
 
 	else:
@@ -173,10 +179,10 @@ def generate(face_path, input_audio, weights, rotate = False):
 
 	if not input_audio.endswith('.wav'):
 		print('Extracting raw audio...')
-		command = 'ffmpeg -y -i {} -strict -2 {}'.format(input_audio, 'temp/temp.wav')
+		command = 'ffmpeg -y -i {} -strict -2 {}'.format(input_audio, 'ChatBotApp/generator/temp/temp.wav')
 
 		subprocess.call(command, shell=True)
-		input_audio = 'temp/temp.wav'
+		input_audio = 'ChatBotApp/generator/temp/temp.wav'
 
 	wav = audio.load_wav(input_audio, 16000)
 	mel = audio.melspectrogram(wav)
@@ -210,7 +216,7 @@ def generate(face_path, input_audio, weights, rotate = False):
 			print ("Model loaded")
 
 			frame_h, frame_w = full_frames[0].shape[:-1]
-			out = cv2.VideoWriter('temp/result.avi', 
+			out = cv2.VideoWriter('ChatBotApp/generator/temp/result.avi', 
 									cv2.VideoWriter_fourcc(*'DIVX'), fps, (frame_w, frame_h))
 
 		img_batch = torch.FloatTensor(np.transpose(img_batch, (0, 3, 1, 2))).to(device)
@@ -230,8 +236,8 @@ def generate(face_path, input_audio, weights, rotate = False):
 
 	out.release()
 
-	command = 'ffmpeg -y -i {} -i {} -strict -2 -q:v 1 {}'.format(input_audio, 'temp/result.avi', hp.outfile)
+	vidName = genRandString()
+	command = 'ffmpeg -y -i {} -i {} -strict -2 -q:v 1 {}'.format(input_audio, 'ChatBotApp/generator/temp/result.avi', hp.outfile + vidName)
 	subprocess.call(command, shell=platform.system() != 'Windows')
 
-if __name__ == '__main__':
-	main()
+	return vidName

@@ -10,7 +10,7 @@ export const postMessage = async ( data ) => {
         headers: { "Content-Type": "multipart/form-data" },
     })
     .then(res => {
-        console.log(res.data)
+        console.log(`RESULTS data => ${res.data}`)
         return res.data
     })
     .catch(err => {

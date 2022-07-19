@@ -1,5 +1,5 @@
 import os
-
+from dotenv import load_dotenv
 from flask import Flask
 from ChatBotApp.chatbot import chatbot
 
@@ -10,6 +10,7 @@ def create_app(test_config=None):
         SECRET_KEY='dev',
     )
 
+    load_dotenv()
     # a simple page that says hello
     @app.route('/hello')
     def hello():

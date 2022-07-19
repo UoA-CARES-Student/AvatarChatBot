@@ -1,6 +1,6 @@
-import chat_api.chatbot_api as convo
-import generator.inference as generator
-import tts.tts as tts
+import ChatBotApp.chat_api.chatbot_api as convo
+import ChatBotApp.generator.inference as generator
+import ChatBotApp.tts.tts as tts
 
 
 
@@ -13,7 +13,10 @@ def generate_video(message, face_path, input_audio, weights):
 
     tts.generate_audio(response)
 
-    generator.generate(face_path, input_audio, weights)
+    vid_name = generator.generate(face_path, input_audio, weights)
+
+
+    return response, vid_name
 
 
     
