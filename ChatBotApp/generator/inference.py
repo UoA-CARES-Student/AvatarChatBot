@@ -1,12 +1,12 @@
 from os import path
 import numpy as np
-import cv2,  generator.audio as audio
+import cv2,  ChatBotApp.generator.audio as audio
 import subprocess
 from tqdm import tqdm
-import torch, generator.face_detection as face_detection
-from generator.models import Wav2Lip
+import torch, ChatBotApp.generator.face_detection as face_detection
+from ChatBotApp.generator.models import Wav2Lip
 import platform
-import hparams as hp
+from ChatBotApp.generator.hparams import hparams as hp
 
 # static = False
 
@@ -24,6 +24,14 @@ def face_detect(images):
 											flip_input=False, device=device)
 
 	batch_size = hp.face_det_batch_size
+
+	print(f"""
+	
+	
+	----------------------------------
+	
+	batch size is {batch_size}
+	""")
 	
 	while 1:
 		predictions = []
@@ -135,17 +143,33 @@ def load_model(path):
 
 def generate(face_path, input_audio, weights, rotate = False):
 	static = False
+	
 	if not path.isfile(face_path):
 		raise ValueError('--face argument must be a valid path to video/image file')
 
 	elif face_path.split('.')[1] in ['jpg', 'png', 'jpeg']:
 		static = True
 		full_frames = [cv2.imread(face_path)]
+
 		fps = hp.fps
 
 	else:
 		video_stream = cv2.VideoCapture(face_path)
 		fps = video_stream.get(cv2.CAP_PROP_FPS)
+
+		print(f"""
+	
+	--------------------
+	
+	cv2fps is: {fps} 
+	
+	
+	
+	
+	
+	-------------------------
+	""")
+
 
 		print('Reading video frames...')
 
@@ -173,10 +197,10 @@ def generate(face_path, input_audio, weights, rotate = False):
 
 	if not input_audio.endswith('.wav'):
 		print('Extracting raw audio...')
-		command = 'ffmpeg -y -i {} -strict -2 {}'.format(input_audio, 'temp/temp.wav')
+		command = 'ffmpeg -y -i {} -strict -2 {}'.format(input_audio, 'ChatBotApp/generator/temp/temp.wav')
 
 		subprocess.call(command, shell=True)
-		input_audio = 'temp/temp.wav'
+		input_audio = 'ChatBotApp/generator/temp/temp.wav'
 
 	wav = audio.load_wav(input_audio, 16000)
 	mel = audio.melspectrogram(wav)
