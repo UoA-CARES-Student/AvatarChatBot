@@ -81,7 +81,8 @@ hparams = HParams(
 	nosmooth = False,
 	pads = [0, 10, 0, 0],
 	crop = [0, -1, 0, -1],
-	box = [-1, -1, -1, -1]
+	box = [-1, -1, -1, -1],
+	outfile ="ChatBotApp/resources/videos/generated_response_video.mp4"
 	
 )
 
