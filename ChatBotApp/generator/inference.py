@@ -24,14 +24,6 @@ def face_detect(images):
 											flip_input=False, device=device)
 
 	batch_size = hp.face_det_batch_size
-
-	print(f"""
-	
-	
-	----------------------------------
-	
-	batch size is {batch_size}
-	""")
 	
 	while 1:
 		predictions = []
@@ -116,7 +108,8 @@ def datagen(frames, mels, static):
 		yield img_batch, mel_batch, frame_batch, coords_batch
 
 mel_step_size = 16
-device = 'cuda' if torch.cuda.is_available() else 'cpu'
+# device = 'cuda' if torch.cuda.is_available() else 'cpu'
+device = 'cpu'
 print('Using {} for inference.'.format(device))
 
 def _load(checkpoint_path):
@@ -156,20 +149,6 @@ def generate(face_path, input_audio, weights, rotate = False):
 	else:
 		video_stream = cv2.VideoCapture(face_path)
 		fps = video_stream.get(cv2.CAP_PROP_FPS)
-
-		print(f"""
-	
-	--------------------
-	
-	cv2fps is: {fps} 
-	
-	
-	
-	
-	
-	-------------------------
-	""")
-
 
 		print('Reading video frames...')
 
@@ -234,7 +213,7 @@ def generate(face_path, input_audio, weights, rotate = False):
 			print ("Model loaded")
 
 			frame_h, frame_w = full_frames[0].shape[:-1]
-			out = cv2.VideoWriter('temp/result.avi', 
+			out = cv2.VideoWriter('ChatBotApp/generator/temp/result.avi', 
 									cv2.VideoWriter_fourcc(*'DIVX'), fps, (frame_w, frame_h))
 
 		img_batch = torch.FloatTensor(np.transpose(img_batch, (0, 3, 1, 2))).to(device)
@@ -254,7 +233,7 @@ def generate(face_path, input_audio, weights, rotate = False):
 
 	out.release()
 
-	command = 'ffmpeg -y -i {} -i {} -strict -2 -q:v 1 {}'.format(input_audio, 'temp/result.avi', hp.outfile)
+	command = 'ffmpeg -y -i {} -i {} -strict -2 -q:v 1 {}'.format(input_audio, 'ChatBotApp/generator/temp/result.avi', hp.outfile)
 	subprocess.call(command, shell=platform.system() != 'Windows')
 
 if __name__ == '__main__':

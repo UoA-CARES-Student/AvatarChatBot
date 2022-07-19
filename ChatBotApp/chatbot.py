@@ -28,9 +28,12 @@ def chatbot():
     weight_path = "/home/tish386/EmoFaceGeneration/emofacegeneration/checkpoints/attension_v6_jul_15/checkpoint_step000123367.pth"
 
     response = generate_video(message,face_path, audio_path ,weight_path)
+    print(response)
+    print(response.__class__)
+    print("Finihsed processing => ")
     return jsonify({
-      "message": response,
-      "video_path": hp.outfile
+      "message": response
+      # "video_path": "/home/tish386/AvatarChatBot/ChatBotApp/results/result_voice.mp4"
     }), 200
 
   return chatbot
