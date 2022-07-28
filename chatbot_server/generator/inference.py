@@ -1,12 +1,12 @@
 from os import path
 import numpy as np
-import cv2,  ChatBotApp.generator.audio as audio
+import cv2,  chatbot_server.generator.audio as audio
 import subprocess
 from tqdm import tqdm
-import torch, ChatBotApp.generator.face_detection as face_detection
-from ChatBotApp.generator.models import Wav2Lip
+import torch, chatbot_server.generator.face_detection as face_detection
+from chatbot_server.generator.models import Wav2Lip
 import platform, random, string
-from ChatBotApp.generator.hparams import hparams as hp
+from chatbot_server.generator.hparams import hparams as hp
 
 
 def genRandString():

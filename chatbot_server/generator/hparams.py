@@ -1,17 +1,6 @@
 from glob import glob
 import os
 
-def get_image_list(data_root, split):
-	filelist = []
-
-	with open('filelists/{}.txt'.format(split)) as f:
-		for line in f:
-			line = line.strip()
-			if ' ' in line: line = line.split()[0]
-			filelist.append(os.path.join(data_root, line))
-
-	return filelist
-
 class HParams:
 	def __init__(self, **kwargs):
 		self.data = {}
@@ -84,7 +73,6 @@ hparams = HParams(
 	crop = [0, -1, 0, -1],
 	box = [-1, -1, -1, -1],
 	outfile ="ChatBotApp/results/"
-
 )
 
 
