@@ -8,6 +8,15 @@ from .generator.hparams import hparams as hp
 
 def chatbot():
 
+  speaker_emotion_face = {
+    "obama-happy": "ChatBotApp/resources/face/obama/obama_happy.png",
+    "obama-neutral": "ChatBotApp/resources/face/obama/obama_neutral.png",
+    "obama-sad": "ChatBotApp/resources/face/obama/obama_sad.png",
+    "monalisa-happy": "ChatBotApp/resources/face/monalisa/monalisa_happy.png",
+    "monalisa-neutral": "ChatBotApp/resources/face/monalisa/monalisa_neutral.png",
+    "monalisa-sad": "ChatBotApp/resources/face/monalisa/monalisa_sad.png"
+  }
+
   chatbot = Blueprint(name='chatbot',import_name=__name__, static_folder='templates')
     
   @chatbot.route('/home',methods=['GET'])
@@ -26,7 +35,7 @@ def chatbot():
 
     face_path = "ChatBotApp/resources/face/input_videoMonaLisa.mp4"
 
-    weight_path = "/home/tish386/EmoFaceGeneration/emofacegeneration/checkpoints/attension_v6_jul_15/checkpoint_step000123367.pth"
+    weight_path = "ChatBotApp/generator/weights/wav2lip_spt_weights.pth"
 
     response, vid_name = generate_video(message,face_path, audio_path ,weight_path)
     print(response)
@@ -37,6 +46,30 @@ def chatbot():
       "video_path": vid_name
     }), 200
 
+  @chatbot.route('/message_img2vid',methods=['POST'])
+  def message_img2vid():
+    try:
+      message = request.form['message']
+      target_speaker = request.form['speaker']
+      emotion = request.form['emotion']
+
+    except Exception as e:
+      print(e)
+
+    audio_path = "ChatBotApp/resources/audio/input_audio.wav"
+
+    face_path = speaker_emotion_face[target_speaker+"-"+emotion]
+
+    weight_path = "ChatBotApp/generator/weights/wav2lip_spt_weights.pth"
+
+    response, vid_name = generate_video(message,face_path, audio_path ,weight_path)
+    print(response)
+    print(response.__class__)
+    print("Finihsed processing => ")
+    return jsonify({
+      "message": response,
+      "video_path": vid_name
+    }), 200
 
 
   @chatbot.after_request

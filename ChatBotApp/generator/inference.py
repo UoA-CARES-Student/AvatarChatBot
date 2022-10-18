@@ -4,7 +4,7 @@ import cv2,  ChatBotApp.generator.audio as audio
 import subprocess
 from tqdm import tqdm
 import torch, ChatBotApp.generator.face_detection as face_detection
-from ChatBotApp.generator.models import Wav2Lip
+from ChatBotApp.generator.models import Wav2Lip_SPT as Wav2Lip
 import platform, random, string
 from ChatBotApp.generator.hparams import hparams as hp
 

@@ -1,23 +1,34 @@
 import React, {useState} from 'react'
+import './Img2Vid.css'; 
+import { postMessageToImage2Vid } from '../../api/Api'
 
-import { postMessage } from '../api/Api'
-import './Home.css';
-
-const Home = ( ) => {
+const Img2Vid = ( ) => {
     
     const [videoPath, setVideoPath] = useState("")
     const[message, setMessage] = useState(""); 
-
     const[response, setResponse] = useState(""); 
-    
 
+    const getInitialSpeaker = () => {
+        const value = "obama";
+        return value;
+    };
+
+    const getInitialEmotion = () => {
+        const value = "happy";
+        return value;
+    };
+
+    const [speaker, setSpeaker] = useState(getInitialSpeaker);
+    const [emotion, setEmotion] = useState(getInitialEmotion);
 
     const submitMessage = (e) =>{
 
         const data = new FormData()
         data.append('message', message)
+        data.append('speaker', speaker)
+        data.append('emotion', emotion)
         const fetchData = async () => {
-            const receivedData = await postMessage(data);
+            const receivedData = await postMessageToImage2Vid(data);
             // console.log(path)
             console.log(`Received data  => ${receivedData}`)
 
@@ -27,13 +38,34 @@ const Home = ( ) => {
         fetchData()
     }
 
+    const handleChangeSpeaker = (e) => {
+        setSpeaker(e.target.value);
+    };
+
+    const handleChangeEmotion = (e) => {
+        setEmotion(e.target.value);
+    };
+
     return (
     
     <div className='centered-div'>
         <div>
             <div>
+                <h1>Image to Video</h1> 
                 <h1>Chat Bot</h1> 
             </div>
+            
+
+            <select value={speaker} onChange={handleChangeSpeaker}>
+                <option value="obama">obama</option>
+                <option value="monalisa">monalisa</option>
+            </select>
+
+            <select value={emotion} onChange={handleChangeEmotion}>
+                <option value="happy">happy</option>
+                <option value="sad">sad</option>
+                <option value="neutral">neurtral</option>
+            </select>
 
             <div className='player-wrapper'>
                 <video className = 'vid-player' width="600" height="400" autoPlay controls preload src={videoPath} type="video/mp4">
@@ -53,10 +85,8 @@ const Home = ( ) => {
 
         </div>
         
-        
-        
     </div>
     )
 }
 
-export default Home
+export default Img2Vid
