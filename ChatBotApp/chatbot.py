@@ -11,7 +11,10 @@ def chatbot():
   speaker_emotion_face = {
     "obama-happy": "ChatBotApp/resources/face/obama/obama_happy.png",
     "obama-neutral": "ChatBotApp/resources/face/obama/obama_neutral.png",
-    "obama-sad": "ChatBotApp/resources/face/obama/obama_sad.png"
+    "obama-sad": "ChatBotApp/resources/face/obama/obama_sad.png",
+    "monalisa-happy": "ChatBotApp/resources/face/monalisa/monalisa_happy.png",
+    "monalisa-neutral": "ChatBotApp/resources/face/monalisa/monalisa_neutral.png",
+    "monalisa-sad": "ChatBotApp/resources/face/monalisa/monalisa_sad.png"
   }
 
   chatbot = Blueprint(name='chatbot',import_name=__name__, static_folder='templates')
