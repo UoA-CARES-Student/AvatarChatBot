@@ -19,3 +19,5 @@ def create_app(test_config=None):
     app.register_blueprint(chatbot(), url_prefix='/v1/chatbot')
     
     return app
+
+    

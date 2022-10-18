@@ -1,23 +1,22 @@
 import './App.css';
-import Home from './pages/Home'
+import React from 'react';
+import {
+  Routes,
+  Route,
+} from "react-router-dom";
+import Home from './pages/Home/Home';
+import Vid2Vid from './pages/Vid2Vid/Vid2Vid';
+import Img2Vid from './pages/Img2Vid/Img2Vid';
 
-function App() {
+
+export const App = () => {
   return (
-    <div style={{
-      backgroundColor: "gray",
-      padding: "5px",
-      height: "100%"
-    }}>
-    <h1 style={{
-        marginLeft : "40px"
-    }}> Project 24 Demo</h1>
-     
-      <div className='content'>
-        <Home/>
-      </div>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="vid2vid" element={<Vid2Vid />} />
+      <Route path="img2vid" element={<Img2Vid />} />
+    </Routes>
 
-      
-    </div>
   );
 }
 
