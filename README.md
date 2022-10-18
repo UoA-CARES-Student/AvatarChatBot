@@ -1,11 +1,15 @@
 # AvatarChatBot
 
-
-
-Run flask app
+Run frontend
 ```
-$ export FLASK_APP=ChatBotApp
-$ export FLASK_ENV=development
-$ flask run
-$ flask run --host=0.0.0.0
+cd client
+npm install
+npm start
+```
+
+
+Run backend
+```
+pip install -r requirements.txt
+python3 run.py
 ```
