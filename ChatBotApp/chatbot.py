@@ -33,7 +33,7 @@ def chatbot():
 
     audio_path = "ChatBotApp/resources/audio/input_audio.wav"
 
-    face_path = "ChatBotApp/resources/face/input_videoMonaLisa.mp4"
+    face_path = "ChatBotApp/resources/face/input_videoKanye.mp4"
 
     weight_path = "ChatBotApp/generator/weights/wav2lip_spt_weights.pth"
 

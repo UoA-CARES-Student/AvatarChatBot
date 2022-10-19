@@ -31,8 +31,7 @@ const Vid2Vid = ( ) => {
     <div className='centered-div'>
         <div>
             <div>
-                <h1>Video to Video</h1> 
-                <h1>Chat Bot</h1> 
+                <h1>Chat Bot: video to video</h1> 
             </div>
 
             <div className='player-wrapper'>
