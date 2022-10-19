@@ -9,6 +9,7 @@
     align-items : center;
     justify-content : center;
     height : 90vh;
+    width: 100vh;
     /* width : 50%; */
 }
 
@@ -72,3 +73,8 @@
     margin-bottom: 5px;
 }
 
+.selector{
+    font-size: 20px;
+    padding: 5px 0 5px 0;
+    margin-bottom: 10px;
+}

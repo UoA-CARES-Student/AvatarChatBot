@@ -51,17 +51,17 @@ const Img2Vid = ( ) => {
     <div className='centered-div'>
         <div>
             <div>
-                <h1>Image to Video</h1> 
-                <h1>Chat Bot</h1> 
+                
+                <h1>Chat Bot: image to video</h1> 
             </div>
             
 
-            <select value={speaker} onChange={handleChangeSpeaker}>
+            <select value={speaker} onChange={handleChangeSpeaker} className="selector">
                 <option value="obama">obama</option>
                 <option value="monalisa">monalisa</option>
             </select>
 
-            <select value={emotion} onChange={handleChangeEmotion}>
+            <select value={emotion} onChange={handleChangeEmotion} className="selector">
                 <option value="happy">happy</option>
                 <option value="sad">sad</option>
                 <option value="neutral">neurtral</option>
