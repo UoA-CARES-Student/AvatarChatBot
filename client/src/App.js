@@ -55,6 +55,7 @@ function App(props) {
 
   return (
     <Box sx={{ display: 'flex' }}  alignItems="center"  justifyContent="center">
+
       <AppBar component="nav">
         <Toolbar>
           <IconButton
@@ -108,10 +109,12 @@ function App(props) {
           {drawer}
         </Drawer>
       </Box>
+
       <Box component="main" sx={{ p: 3 }} display="flex"
       justifyContent="center"
       alignItems="center"
       width="100vh">
+
         <Toolbar />
           <Routes>
             <Route path="/" element={<Home />} />
